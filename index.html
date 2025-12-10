@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Click Khareed - آن لائن جیولری کیٹلاگ۔ نیکلس، کفلنگز، بینگلز، رنگز اور مزید">
+    <meta name="theme-color" content="#0d0d0d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Click Khareed - Digital Jewelry Catalog</title>
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://res.cloudinary.com">
+    
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gold': '#D4AF37',
+                        'gold-light': '#E8C547',
+                        'gold-dark': '#B8962F',
+                        'matte': {
+                            'primary': '#0d0d0d',
+                            'secondary': '#151515',
+                            'tertiary': '#1c1c1c',
+                            'card': '#1a1a1a',
+                            'elevated': '#222222',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome (with display=swap for better performance) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    </noscript>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-gray-50 font-sans">
+
+    <!-- 1. HEADER & HERO SECTION (عنوان اور واٹس ایپ بٹن) -->
+    <header class="header-main py-6 px-4 text-center">
+        <!-- Decorative Top Border -->
+        <div class="header-accent"></div>
+
+        <!-- Logo Container -->
+        <div class="logo-container flex justify-center mb-5">
+            <div class="logo-wrapper">
+                <img
+                    src="https://res.cloudinary.com/ddhshf7gu/image/upload/f_auto,q_auto,w_500/v1765302123/Logo_with_white_text_adpeqp.png"
+                    alt="Click Khareed - Digital Jewelry Store"
+                    class="h-28 sm:h-32 md:h-36 lg:h-40 w-auto object-contain logo-image"
+                    loading="eager"
+                >
+            </div>
+        </div>
+
+        <!-- Tagline -->
+        <p class="header-tagline text-gold text-sm sm:text-base font-semibold mb-4 tracking-wide">✨ آن لائن جیولری شاپ ✨</p>
+
+        <!-- Delivery Badge -->
+        <div class="flex justify-center items-center gap-2 mb-5">
+            <span class="delivery-badge text-sm sm:text-base px-4 py-2 rounded-full font-bold flex items-center">
+                <i class="fas fa-motorcycle ml-2 text-gold"></i>
+                <span class="mr-2">ڈیلیوری چارج:</span>
+                <span id="delivery-charge" class="font-bold">250 روپے</span>
+            </span>
+        </div>
+
+        <!-- WhatsApp CTA Button -->
+        <button onclick="openCheckoutModal()" class="btn-gold w-full max-w-md text-lg py-4 px-6 rounded-2xl flex items-center justify-center mx-auto shadow-xl hover:shadow-2xl">
+            <i class="fab fa-whatsapp text-2xl ml-3"></i>
+            <span>واٹس ایپ پر آرڈر بھیجیں</span>
+        </button>
+        <p class="text-sm text-gray-400 mt-3 flex items-center justify-center gap-2">
+            <i class="fas fa-hand-pointer text-gold text-xs"></i>
+            نیچے سے سامان منتخب کریں
+        </p>
+    </header>
+
+    <!-- 2. CATEGORY CHIPS (کیٹیگریز کی پٹی) -->
+    <nav class="category-nav py-3 overflow-x-auto no-scrollbar whitespace-nowrap">
+        <div class="px-4 flex space-x-3 rtl:space-x-reverse" id="category-chips">
+            <!-- JS سے بھرے گا -->
+        </div>
+    </nav>
+
+    <!-- 3. PRODUCT LIST AREA (سامان کی فہرست) -->
+    <main class="product-container max-w-md mx-auto p-4 space-y-8 lg:max-w-4xl" id="product-container">
+        <!-- JS سے بھرے گا -->
+    </main>
+
+    <!-- 4. PERSISTENT PARCHI (نیچے والا بٹن) -->
+    <div id="parchi-bar" class="parchi-bar fixed bottom-0 left-0 right-0 p-4 z-40 transform transition-transform duration-300 translate-y-full">
+        <div class="max-w-md mx-auto flex items-center justify-between gap-4">
+
+            <!-- Bill Info -->
+            <div class="flex flex-col text-right">
+                <span class="text-sm text-gold font-bold uppercase tracking-wider">منتخب سامان</span>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-black text-gold" id="total-price">0 آئٹمز</span>
+                </div>
+                <span class="text-xs text-gray-400 font-medium" id="total-items-breakdown"></span>
+            </div>
+
+            <!-- Checkout Button -->
+            <button onclick="openCheckoutModal()" class="btn-gold flex-1 text-lg py-3 px-6 rounded-xl flex items-center justify-center gap-2">
+                <i class="fas fa-chevron-left"></i>
+                <span>آرڈر مکمل کریں</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 5. IMAGE ZOOM MODAL (تصویر بڑی دیکھنے کیلئے) -->
+    <div id="image-modal" class="modal modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="relative w-full max-w-md" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeImageModal()" class="close-btn absolute -top-12 left-0 w-10 h-10 rounded-full flex items-center justify-center z-10">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <!-- Image Area -->
+            <div id="modal-image-content" class="w-full rounded-2xl flex items-center justify-center mb-4 shadow-2xl bg-matte-card overflow-hidden min-h-[300px]">
+                <!-- Image will be inserted here -->
+            </div>
+
+            <!-- Details -->
+            <div class="text-center text-white">
+                <h3 id="modal-image-title" class="text-2xl font-bold mb-1 text-gold">Product</h3>
+                <p id="modal-image-code" class="text-sm text-gray-400 mb-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. CHECKOUT FORM MODAL (آخری آرڈر فارم) -->
+    <div id="checkout-modal" class="modal modal-backdrop fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+        <div class="slide-up-panel checkout-panel w-full max-w-md rounded-t-3xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto flex flex-col" onclick="event.stopPropagation()">
+
+            <!-- Header -->
+            <div class="checkout-header p-5 flex justify-between items-center rounded-t-3xl">
+                <h3 class="text-xl font-bold text-gold">آرڈر کی تفصیل</h3>
+                <button onclick="closeCheckoutModal()" class="close-btn w-9 h-9 rounded-full flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6 overflow-y-auto">
+
+                <!-- Bill Summary Card -->
+                <div class="bill-card p-5">
+                    <div class="flex justify-between text-gray-300 mb-2">
+                        <span>منتخب سامان</span>
+                        <span id="checkout-subtotal" class="font-medium text-right">0 آئٹمز</span>
+                    </div>
+                    <div class="border-t border-gray-700 pt-3 flex justify-between items-center">
+                        <span class="font-bold text-lg text-gold">ڈیلیوری چارج</span>
+                        <span id="checkout-grand-total" class="font-bold text-2xl text-gold text-right">250 روپے</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">قیمت واٹس ایپ پر بتائی جائے گی</p>
+                </div>
+
+                <!-- Easy Form (Optional) -->
+                <div class="space-y-4">
+                    <p class="text-sm text-gray-400 font-bold">یہ معلومات آپشنل ہیں، خالی بھی چھوڑ سکتے ہیں:</p>
+
+                    <!-- 1. Engraving Name -->
+                    <div class="relative">
+                        <input type="text" id="cust-engraving-name" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="جیسے: سارہ, زوہیب، یا خالی چھوڑ دیں">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-signature text-gold"></i>
+                        </div>
+                        <label class="block text-xs font-bold text-gray-500 mt-1 mr-1">وہ نام جو آپ ڈیزائن پر لکھوانا چاہتے ہیں</label>
+                    </div>
+
+                    <!-- 2. Receiver Name -->
+                    <div class="relative">
+                        <input type="text" id="cust-receiver-name" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="جیسے: وصول کرنے والے کا نام">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-box text-gold"></i>
+                        </div>
+                        <label class="block text-xs font-bold text-gray-500 mt-1 mr-1">وہ نام جس نام پر پارسل وصول ہوگا</label>
+                    </div>
+
+                    <!-- 3. Phone -->
+                    <div class="relative">
+                        <input type="tel" id="cust-phone" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="0300-1234567">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-phone text-gold"></i>
+                        </div>
+                        <label class="block text-xs font-bold text-gray-500 mt-1 mr-1">کال والا نمبر (سم نمبر)</label>
+                    </div>
+
+                    <!-- 4. Address -->
+                    <div class="relative">
+                        <textarea id="cust-address" rows="2" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="مختصر اور سادہ ایڈریس لکھیں"></textarea>
+                        <div class="absolute top-3 right-3 pointer-events-none">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                        </div>
+                        <label class="block text-xs font-bold text-gray-500 mt-1 mr-1">ایڈریس (سادہ لکھ دیں)</label>
+                    </div>
+                </div>
+
+                <!-- Final Action Note -->
+                <p class="text-sm text-center text-gray-400">
+                    <i class="fas fa-check-circle mr-1 text-gold"></i>
+                    آرڈر بھیجنے کے لیے نیچے والا بٹن دبائیں!
+                </p>
+
+            </div>
+
+            <!-- Big Action Button -->
+            <div class="checkout-footer p-5 rounded-b-2xl">
+                <button onclick="finalizeAndSend()" class="btn-gold w-full text-lg py-4 rounded-xl flex items-center justify-center gap-3">
+                    <i class="fab fa-whatsapp text-2xl ml-3"></i>
+                    <span>واٹس ایپ پر بھیجیں</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js" defer></script>
+</body>
+</html>
