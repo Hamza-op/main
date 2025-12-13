@@ -16,7 +16,53 @@ const CONFIG = {
 };
 
 // ============================================
-// Product Data (Ordered: نیکلس، بینگلز، کفلنگز، مردانہ بریسلٹس، رِنگز، گھڑیاں، ائرنگز، کورٹ پنز)
+// Theme Management (Dark/Light Mode)
+// ============================================
+const THEME_KEY = 'click-khareed-theme';
+
+/**
+ * Initialize theme from localStorage or default to dark
+ */
+function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+    applyTheme(savedTheme);
+}
+
+/**
+ * Apply the specified theme
+ */
+function applyTheme(theme) {
+    const html = document.documentElement;
+    const icon = document.getElementById('theme-icon');
+
+    if (theme === 'light') {
+        html.setAttribute('data-theme', 'light');
+        if (icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    } else {
+        html.removeAttribute('data-theme');
+        if (icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }
+
+    localStorage.setItem(THEME_KEY, theme);
+}
+
+/**
+ * Toggle between dark and light themes
+ */
+function toggleTheme() {
+    const currentTheme = localStorage.getItem(THEME_KEY) || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+}
+
+// ============================================
+// Product Data (Ordered: نیکلس، بینگلز، کفلنگز، مردانہ بریسلٹس، رِنگز، گھڑیاں، ائرنگز، کوٹ پن)
 // Prices are from price.md
 // ============================================
 const categories = [
@@ -135,7 +181,7 @@ const categories = [
     },
     {
         id: "court_pins",
-        label: "کورٹ پنز",
+        label: "کوٹ پن",
         icon: "fa-award",
         products: [
             { id: "1-P", name: "Crowned Chain Signature Coat Pin", code: "1-P", price: 1000, image: "https://res.cloudinary.com/ddhshf7gu/image/upload/v1765302061/Crowned_Chain_Signature_Coat_Pin_1-P_e0vkxx.png" },
@@ -652,6 +698,9 @@ function setupModalListeners() {
  * Initialize the application
  */
 function init() {
+    // Initialize theme first (before any rendering)
+    initTheme();
+
     // Cache DOM elements
     chipsContainer = getElement('category-chips');
     productsContainer = getElement('product-container');
@@ -687,3 +736,4 @@ window.closeImageModal = closeImageModal;
 window.finalizeAndSend = finalizeAndSend;
 window.openWhatsAppDirect = openWhatsAppDirect;
 window.toggleProductFromModal = toggleProductFromModal;
+window.toggleTheme = toggleTheme;

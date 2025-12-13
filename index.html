@@ -58,6 +58,11 @@
         <!-- Decorative Top Border -->
         <div class="header-accent"></div>
 
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+
         <!-- Logo Container -->
         <div class="logo-container flex justify-center mb-5">
             <div class="logo-wrapper">
@@ -82,8 +87,8 @@
             </span>
         </div>
 
-        <!-- WhatsApp CTA Button - Direct redirect to WhatsApp -->
-        <button onclick="openWhatsAppDirect()" class="btn-gold w-full max-w-md text-lg py-4 px-6 rounded-2xl flex items-center justify-center mx-auto shadow-xl hover:shadow-2xl">
+        <!-- WhatsApp CTA Button - Direct redirect to WhatsApp (WhatsApp Green) -->
+        <button onclick="openWhatsAppDirect()" class="btn-whatsapp w-full max-w-md text-lg py-4 px-6 rounded-2xl flex items-center justify-center mx-auto">
             <i class="fab fa-whatsapp text-2xl ml-3"></i>
             <span>واٹس ایپ پر رابطہ کریں</span>
         </button>

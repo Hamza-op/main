@@ -1,9 +1,9 @@
 /* ============================================
    Click Khareed - Luxury Jewelry Catalog
-   Matte Black + Light Gold Theme
+   Matte Black + Light Gold Theme with Dark/Light Mode
    ============================================ */
 
-/* CSS Custom Properties (Variables) */
+/* CSS Custom Properties (Variables) - Dark Mode (Default) */
 :root {
     /* Matte Black Palette */
     --bg-primary: #0d0d0d;
@@ -11,33 +11,70 @@
     --bg-tertiary: #1c1c1c;
     --bg-card: #1a1a1a;
     --bg-elevated: #222222;
-    
+
     /* Light Gold Palette */
     --gold-primary: #D4AF37;
     --gold-light: #E8C547;
     --gold-dark: #B8962F;
     --gold-muted: rgba(212, 175, 55, 0.15);
     --gold-glow: rgba(212, 175, 55, 0.25);
-    
+
     /* Text Colors */
     --text-primary: #f5f5f5;
     --text-secondary: #a3a3a3;
     --text-muted: #666666;
-    
+
     /* Border Colors */
     --border-primary: #2a2a2a;
     --border-gold: rgba(212, 175, 55, 0.3);
-    
+
     /* Shadows */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
     --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
-    
+
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;
     --transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* WhatsApp Green */
+    --whatsapp-green: #25D366;
+    --whatsapp-green-dark: #1DA851;
+    --whatsapp-green-light: #34E879;
+}
+
+/* Light Mode Theme */
+[data-theme="light"] {
+    /* Light Background Palette */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ebebeb;
+    --bg-tertiary: #e0e0e0;
+    --bg-card: #ffffff;
+    --bg-elevated: #f8f8f8;
+
+    /* Gold stays the same but slightly darker for contrast */
+    --gold-primary: #C9A227;
+    --gold-light: #D4AF37;
+    --gold-dark: #A68B1F;
+    --gold-muted: rgba(201, 162, 39, 0.15);
+    --gold-glow: rgba(201, 162, 39, 0.25);
+
+    /* Text Colors */
+    --text-primary: #1a1a1a;
+    --text-secondary: #555555;
+    --text-muted: #888888;
+
+    /* Border Colors */
+    --border-primary: #d4d4d4;
+    --border-gold: rgba(201, 162, 39, 0.4);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --shadow-gold: 0 4px 20px rgba(201, 162, 39, 0.25);
 }
 
 /* Base Reset & Defaults */
@@ -121,6 +158,66 @@ body {
 /* Text color utility for gray-900 (used in selected checkmarks) */
 .text-gray-900 {
     color: #111827 !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-gold);
+    color: var(--gold-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover {
+    background: var(--gold-primary);
+    color: var(--bg-primary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-gold);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle i {
+    font-size: 1.1rem;
+    transition: transform var(--transition-normal);
+}
+
+.theme-toggle:hover i {
+    transform: rotate(15deg);
+}
+
+/* WhatsApp Button Styles */
+.btn-whatsapp {
+    background: linear-gradient(135deg, var(--whatsapp-green-light) 0%, var(--whatsapp-green) 50%, var(--whatsapp-green-dark) 100%);
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    transition: all var(--transition-fast);
+    min-height: 48px;
+}
+
+.btn-whatsapp:hover {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+    transform: translateY(-1px);
+}
+
+.btn-whatsapp:active {
+    transform: scale(0.98) translateY(0);
 }
 
 /* Header Styles */
@@ -600,4 +697,113 @@ body {
     .category-nav {
         display: none !important;
     }
+}
+
+/* ============================================
+   Light Mode Specific Overrides
+   ============================================ */
+
+/* Light mode body background */
+[data-theme="light"] body {
+    background: var(--bg-primary);
+    background-image:
+        radial-gradient(ellipse at top, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-primary) 0%, #e8e8e8 100%);
+}
+
+/* Light mode header adjustments */
+[data-theme="light"] .header-main {
+    box-shadow:
+        var(--shadow-lg),
+        0 4px 30px rgba(201, 162, 39, 0.15);
+}
+
+/* Light mode text colors for Tailwind overrides */
+[data-theme="light"] .text-gray-50,
+[data-theme="light"] .text-gray-100 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-gray-400 {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+/* Light mode product cards */
+[data-theme="light"] .product-card {
+    background: var(--bg-card);
+    border-color: var(--border-primary);
+}
+
+[data-theme="light"] .product-card:hover {
+    border-color: var(--border-gold);
+}
+
+/* Light mode category chips */
+[data-theme="light"] .category-chip {
+    background: var(--bg-card);
+    border-color: var(--border-primary);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .category-chip:hover,
+[data-theme="light"] .category-chip:focus {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+/* Light mode form inputs */
+[data-theme="light"] .form-input {
+    background: var(--bg-elevated);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .form-input:focus {
+    border-color: var(--gold-primary);
+}
+
+/* Light mode modals */
+[data-theme="light"] .slide-up-panel,
+[data-theme="light"] .checkout-panel {
+    background: var(--bg-card);
+}
+
+[data-theme="light"] .checkout-header {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
+[data-theme="light"] .bill-card {
+    background: var(--bg-elevated);
+    border-color: var(--border-gold);
+}
+
+/* Light mode close button */
+[data-theme="light"] .close-btn {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .close-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Light mode parchi bar */
+[data-theme="light"] .parchi-bar {
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+    border-color: var(--border-gold);
+}
+
+/* Light mode selection check */
+[data-theme="light"] .selection-check {
+    border-color: var(--border-primary);
+}
+
+/* Light mode image modal background */
+[data-theme="light"] #modal-image-content {
+    background: var(--bg-elevated);
 }
