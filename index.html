@@ -62,7 +62,7 @@
         <div class="logo-container flex justify-center mb-5">
             <div class="logo-wrapper">
                 <img
-                    src="https://res.cloudinary.com/ddhshf7gu/image/upload/f_auto,q_auto,w_500/v1765302123/Logo_with_white_text_adpeqp.png"
+                    src="https://res.cloudinary.com/ddhshf7gu/image/upload/f_auto,q_auto,w_500/v1765614257/2_q5zwy6.png"
                     alt="Click Khareed - Digital Jewelry Store"
                     class="h-28 sm:h-32 md:h-36 lg:h-40 w-auto object-contain logo-image"
                     loading="eager"
@@ -82,10 +82,10 @@
             </span>
         </div>
 
-        <!-- WhatsApp CTA Button -->
-        <button onclick="openCheckoutModal()" class="btn-gold w-full max-w-md text-lg py-4 px-6 rounded-2xl flex items-center justify-center mx-auto shadow-xl hover:shadow-2xl">
+        <!-- WhatsApp CTA Button - Direct redirect to WhatsApp -->
+        <button onclick="openWhatsAppDirect()" class="btn-gold w-full max-w-md text-lg py-4 px-6 rounded-2xl flex items-center justify-center mx-auto shadow-xl hover:shadow-2xl">
             <i class="fab fa-whatsapp text-2xl ml-3"></i>
-            <span>واٹس ایپ پر آرڈر بھیجیں</span>
+            <span>واٹس ایپ پر رابطہ کریں</span>
         </button>
         <p class="text-sm text-gray-400 mt-3 flex items-center justify-center gap-2">
             <i class="fas fa-hand-pointer text-gold text-xs"></i>
@@ -129,8 +129,8 @@
     <!-- 5. IMAGE ZOOM MODAL (تصویر بڑی دیکھنے کیلئے) -->
     <div id="image-modal" class="modal modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="relative w-full max-w-md" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button onclick="closeImageModal()" class="close-btn absolute -top-12 left-0 w-10 h-10 rounded-full flex items-center justify-center z-10">
+            <!-- Close Button - Positioned inside the modal container for visibility -->
+            <button onclick="closeImageModal()" class="absolute top-2 left-2 w-10 h-10 rounded-full flex items-center justify-center z-20 bg-gray-800 bg-opacity-80 hover:bg-opacity-100 text-white shadow-lg transition-all">
                 <i class="fas fa-times text-xl"></i>
             </button>
 
@@ -143,6 +143,13 @@
             <div class="text-center text-white">
                 <h3 id="modal-image-title" class="text-2xl font-bold mb-1 text-gold">Product</h3>
                 <p id="modal-image-code" class="text-sm text-gray-400 mb-1"></p>
+                <p id="modal-image-price" class="text-lg font-bold text-green-400 mb-3"></p>
+
+                <!-- Select Product Button -->
+                <button id="modal-select-btn" onclick="toggleProductFromModal()" class="bg-gold text-gray-900 font-bold py-3 px-6 rounded-xl flex items-center justify-center mx-auto shadow-lg hover:shadow-xl transition-all">
+                    <i class="fas fa-plus ml-2"></i>
+                    <span>منتخب کریں</span>
+                </button>
             </div>
         </div>
     </div>
@@ -167,20 +174,27 @@
                         <span>منتخب سامان</span>
                         <span id="checkout-subtotal" class="font-medium text-right">0 آئٹمز</span>
                     </div>
+                    <div class="flex justify-between text-gray-300 mb-2">
+                        <span>سامان کی قیمت</span>
+                        <span id="checkout-items-price" class="font-medium text-right text-green-400">0 روپے</span>
+                    </div>
+                    <div class="flex justify-between text-gray-300 mb-2">
+                        <span>ڈیلیوری چارج</span>
+                        <span id="checkout-delivery" class="font-medium text-right">250 روپے</span>
+                    </div>
                     <div class="border-t border-gray-700 pt-3 flex justify-between items-center">
-                        <span class="font-bold text-lg text-gold">ڈیلیوری چارج</span>
+                        <span class="font-bold text-lg text-gold">کل رقم</span>
                         <span id="checkout-grand-total" class="font-bold text-2xl text-gold text-right">250 روپے</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2 text-center">قیمت واٹس ایپ پر بتائی جائے گی</p>
                 </div>
 
                 <!-- Easy Form (Optional) -->
                 <div class="space-y-4">
-                    <p class="text-sm text-gray-400 font-bold">یہ معلومات آپشنل ہیں، خالی بھی چھوڑ سکتے ہیں:</p>
+                    <p class="text-sm text-gray-400 font-bold">یہ معلومات آپشنل ہیں، </p>
 
                     <!-- 1. Engraving Name -->
                     <div class="relative">
-                        <input type="text" id="cust-engraving-name" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="جیسے: سارہ, زوہیب، یا خالی چھوڑ دیں">
+                        <input type="text" id="cust-engraving-name" class="form-input w-full pl-4 pr-10 py-3 rounded-xl text-right" placeholder="جیسے: سارہ زُہیب">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <i class="fas fa-signature text-gold"></i>
                         </div>
